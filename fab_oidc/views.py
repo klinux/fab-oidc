@@ -74,19 +74,19 @@ class AuthOIDCView(AuthOIDView):
                 logger.info(f"user added: {info.get(EMAIL_OIDC_FIELD)}")
 
             # sync roles from keycloak to flask
-            user.roles.clear()
-            sm.update_user(user)
+            # user.roles.clear()
+            # sm.update_user(user)
 
-            if info.get(KEYCLOAK_CLIENT_ROLE_OIDC_FIELD) is None:
-                logger.error(
-                    f'user {info.get(EMAIL_OIDC_FIELD)} does not have ROLE')
-                logger.error(f'user info: {info}')
-            else:
-                for role in info.get(KEYCLOAK_CLIENT_ROLE_OIDC_FIELD):
-                    user.roles.append(sm.find_role(role))
-                    logger.info(
-                        f"assign role: {role}, find_role: {sm.find_role(role)} to user: {info.get(EMAIL_OIDC_FIELD)}")
-                sm.update_user(user)
+            # if info.get(KEYCLOAK_CLIENT_ROLE_OIDC_FIELD) is None:
+            #     logger.error(
+            #         f'user {info.get(EMAIL_OIDC_FIELD)} does not have ROLE')
+            #     logger.error(f'user info: {info}')
+            # else:
+            #     for role in info.get(KEYCLOAK_CLIENT_ROLE_OIDC_FIELD):
+            #         user.roles.append(sm.find_role(role))
+            #         logger.info(
+            #             f"assign role: {role}, find_role: {sm.find_role(role)} to user: {info.get(EMAIL_OIDC_FIELD)}")
+            #     sm.update_user(user)
 
             login_user(user, remember=False)
             return redirect(self.appbuilder.get_url_for_index)
