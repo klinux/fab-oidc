@@ -83,9 +83,9 @@ class AuthOIDCView(AuthOIDView):
                 logger.error(f'user info: {info}')
             else:
                 for role in info.get(KEYCLOAK_CLIENT_ROLE_OIDC_FIELD):
-                    user.roles.append(sm.find_role(role))
+                    user.roles.append(role)
                     logger.info(
-                        f"assign role: {role}, find_role: {sm.find_role(role)} to user: {info.get(EMAIL_OIDC_FIELD)}")
+                        f"assign role: {role}, find_role: {role} to user: {info.get(EMAIL_OIDC_FIELD)}")
                 sm.update_user(user)
 
             login_user(user, remember=False)
